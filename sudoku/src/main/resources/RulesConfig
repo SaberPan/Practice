@@ -1,0 +1,7 @@
+com.saber.rule.impl.PossibleValueRule
+com.saber.rule.impl.RemoveDuplicatedPossible
+com.saber.rule.impl.RemoveDuplicatedPossibleOnX
+com.saber.rule.impl.RemoveDuplicatedPossibleOnY
+com.saber.rule.impl.ExclusiveMethod
+com.saber.rule.impl.RecessivenessExclusiveMethodOnX
+com.saber.rule.impl.RecessivenessExclusiveMethodOnY
