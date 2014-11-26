@@ -1,9 +1,9 @@
 package com.saber.rule.impl;
 
-import java.util.List;
-
 import com.saber.bean.SudokuGrid;
 import com.saber.rule.IFindRule;
+
+import java.util.List;
 
 /**
  * @author Saber Pan
@@ -46,8 +46,8 @@ public class RecessivenessExclusiveImproveOnX extends BaseAbstract implements IF
 				}
 				for (int subY = 0; subY < 3; subY++) {
 					int tempY = 3 * yIndex + subY;
-					List<Integer> otherGridPsossibleValues = sudokuGrid.getPossibleValue(tempX, tempY);
-					if (otherGridPsossibleValues.contains(possibleValue)) {
+					List<Integer> otherGridPossibleValues = sudokuGrid.getPossibleValue(tempX, tempY);
+					if (otherGridPossibleValues.contains(possibleValue)) {
 						isFind = false;
 						break;
 					}

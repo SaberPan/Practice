@@ -27,12 +27,6 @@ public class RecessivenessExclusiveImproveOnXTest extends BaseTest {
 	public void testFind() throws Exception {
 		String filePath = PathUtils.getPath("com/saber/rule/impl/RecessivenessExclusiveImproveOnX.xlsx");
 		super.testFind(RecessivenessExclusiveImproveOnX.class, filePath, 7, 1, 7);
-
-		filePath = PathUtils.getPath("com/saber/rule/impl/RecessivenessExclusiveImproveOnX2.xlsx");
-		super.testFind(RecessivenessExclusiveImproveOnX.class, filePath, 0, 7, 6);
-
-		filePath = PathUtils.getPath("com/saber/rule/impl/RecessivenessExclusiveImproveOnX2.xlsx");
-		super.testFind(RecessivenessExclusiveImproveOnX.class, filePath, 0, 8, 8);
 	}
 
 }
