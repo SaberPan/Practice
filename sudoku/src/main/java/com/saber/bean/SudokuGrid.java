@@ -3,12 +3,13 @@
  */
 package com.saber.bean;
 
+import com.saber.constant.SudokuConstant;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.saber.constant.SudokuConstant;
 
 /**
  * @author Saber Pan
@@ -16,6 +17,7 @@ import com.saber.constant.SudokuConstant;
  */
 public class SudokuGrid implements Cloneable {
 
+	private static Logger LOG = Logger.getLogger(SudokuGrid.class);
 	private Grid[] grids = new Grid[SudokuConstant.GRID_SIZE];
 	private List<String> inputList = new ArrayList<String>();
 
@@ -109,8 +111,8 @@ public class SudokuGrid implements Cloneable {
 	}
 
 	public boolean isOver() {
-		for (int i = 0; i < grids.length; i++) {
-			if (grids[i] == null || !grids[i].isOver()) {
+		for (Grid grid : grids) {
+			if (grid == null || !grid.isOver()) {
 				return false;
 			}
 		}
@@ -118,13 +120,7 @@ public class SudokuGrid implements Cloneable {
 	}
 
 	public boolean isRight() throws Exception {
-		if (!isRightOnX()) {
-			return false;
-		}
-		if (!isRightOnY()) {
-			return false;
-		}
-		return true;
+		return isRightOnX() && isRightOnY();
 	}
 
 	private boolean isRightOnX() throws Exception {
@@ -137,7 +133,7 @@ public class SudokuGrid implements Cloneable {
 				}
 
 				if (set.contains(value)) {
-					System.err.println("Same value on X: " + value);
+					LOG.error("Same value on X: " + value);
 					return false;
 				} else {
 					set.add(value);
@@ -158,7 +154,7 @@ public class SudokuGrid implements Cloneable {
 				}
 
 				if (set.contains(value)) {
-					System.err.println("Same value on Y: " + value);
+					LOG.error("Same value on Y: " + value);
 					return false;
 				} else {
 					set.add(value);
@@ -174,7 +170,6 @@ public class SudokuGrid implements Cloneable {
 	 * 
 	 * @param value
 	 * @param x
-	 * @param y
 	 * @return
 	 * @throws Exception
 	 */
@@ -205,7 +200,6 @@ public class SudokuGrid implements Cloneable {
 	 * There are the <i>value</i> on the other two Y.
 	 * 
 	 * @param value
-	 * @param x
 	 * @param y
 	 * @return
 	 * @throws Exception

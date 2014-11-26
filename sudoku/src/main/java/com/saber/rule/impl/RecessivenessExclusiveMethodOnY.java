@@ -1,14 +1,9 @@
 package com.saber.rule.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.saber.bean.SudokuGrid;
 import com.saber.rule.IFindRule;
+
+import java.util.*;
 
 /**
  * @author Saber Pan
@@ -29,10 +24,8 @@ public class RecessivenessExclusiveMethodOnY extends BaseAbstract implements IFi
 				int gx = 3 * (x / 3) + gridX;
 				if ((gx != x || gy != y) && sudokuGrid.getValue(x, y) == null) {
 					List<Integer> possibleList = sudokuGrid.getPossibleValue(gx, gy);
-					if (possibleList.size() >= 2) {
-						otherList.add(possibleList);
-						coordinateMap.put(possibleList, new int[] { gx, gy });
-					}
+					otherList.add(possibleList);
+					coordinateMap.put(possibleList, new int[] { gx, gy });
 				}
 			}
 		}

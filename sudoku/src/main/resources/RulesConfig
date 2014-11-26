@@ -3,5 +3,7 @@ com.saber.rule.impl.RemoveDuplicatedPossible
 com.saber.rule.impl.RemoveDuplicatedPossibleOnX
 com.saber.rule.impl.RemoveDuplicatedPossibleOnY
 com.saber.rule.impl.ExclusiveMethod
+com.saber.rule.impl.RecessivenessExclusiveImproveOnX
+com.saber.rule.impl.RecessivenessExclusiveImproveOnY
 com.saber.rule.impl.RecessivenessExclusiveMethodOnX
 com.saber.rule.impl.RecessivenessExclusiveMethodOnY

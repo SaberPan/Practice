@@ -1,10 +1,9 @@
 package com.saber;
 
-import java.io.File;
-
+import com.saber.util.PathUtils;
 import org.apache.commons.io.FilenameUtils;
 
-import com.saber.util.PathUtils;
+import java.io.File;
 
 /**
  * @author Saber Pan
