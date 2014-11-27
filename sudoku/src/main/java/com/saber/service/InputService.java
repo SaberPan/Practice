@@ -1,11 +1,10 @@
 package com.saber.service;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.saber.bean.SudokuGrid;
 import com.saber.util.ExcelUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * @author Saber Pan
@@ -14,18 +13,21 @@ import com.saber.util.ExcelUtils;
 public class InputService {
 
 	public SudokuGrid inputByFile(String filePath) throws Exception {
-		List<List<String>> list = ExcelUtils.getExcleContent(filePath);
+		List<List<String>> list = ExcelUtils.getExcelContent(filePath);
 
 		SudokuGrid sudokuGrid = new SudokuGrid();
 
 		// y-index
-		for (int i = 0; i < list.size(); i++) {
-			List<String> array = list.get(i);
+		for (int y = 0; y < list.size(); y++) {
+			List<String> array = list.get(y);
 			// x-index
-			for (int j = 0; j < array.size(); j++) {
-				if (StringUtils.isNotBlank(array.get(j))) {
-					sudokuGrid.setValue(Integer.parseInt(array.get(j)), j, i);
-					sudokuGrid.setIsInput(j, i);
+			for (int x = 0; x < array.size(); x++) {
+				if (StringUtils.isNotBlank(array.get(x))) {
+					int value = Double.valueOf(array.get(x)).intValue();
+					if (value != 0) {
+						sudokuGrid.setValue(value, x, y);
+						sudokuGrid.setIsInput(x, y);
+					}
 				}
 			}
 		}

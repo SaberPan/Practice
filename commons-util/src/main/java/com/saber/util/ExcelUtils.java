@@ -1,17 +1,13 @@
 package com.saber.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Saber Pan
@@ -19,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelUtils {
 
-	public static List<List<String>> getExcleContent(String filePath) throws IOException {
+	public static List<List<String>> getExcelContent(String filePath) throws IOException {
 		InputStream input = new FileInputStream(filePath);
 		XSSFWorkbook workbook = new XSSFWorkbook(input);
 		XSSFSheet sheet = workbook.getSheetAt(0);

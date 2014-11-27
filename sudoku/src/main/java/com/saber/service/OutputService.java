@@ -1,21 +1,16 @@
 package com.saber.service;
 
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.saber.bean.SudokuGrid;
+import com.saber.constant.SudokuConstant;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 
-import com.saber.bean.SudokuGrid;
-import com.saber.constant.SudokuConstant;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Saber Pan
@@ -85,6 +80,24 @@ public class OutputService {
 				if (value == null) {
 					// cell.setCellValue("");
 					cell.setCellValue(ArrayUtils.toString(sukGrid.getPossibleValue(x, y)));
+				} else {
+					cell.setCellValue(value);
+				}
+			}
+		}
+		workbook.write(new FileOutputStream(filePath));
+	}
+
+	public void output2FileForOriginal(String filePath, SudokuGrid sukGrid) throws Exception {
+		for (int y = 0; y < SudokuConstant.GRID_SIZE; y++) {
+			XSSFRow row = sheet.createRow(y);
+			for (int x = 0; x < SudokuConstant.GRID_SIZE; x++) {
+				XSSFCell cell = row.createCell(x);
+
+				setCellStyle(true, y, x, cell);
+				Integer value = sukGrid.getValue(x, y);
+				if (value == null) {
+					cell.setCellValue("");
 				} else {
 					cell.setCellValue(value);
 				}

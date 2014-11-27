@@ -42,6 +42,10 @@ public class RecessivenessExclusiveImproveOnY extends BaseAbstract implements IF
 			}
 		}
 
+		if (falseCount != 1) {
+			return false;
+		}
+
 		LOG.info("[" + x + "," + y + "] - " + value);
 		sudokuGrid.setValue(value, x, y);
 		return true;
