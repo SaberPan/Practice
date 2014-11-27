@@ -1,15 +1,10 @@
 package com.saber.rule.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.saber.bean.SudokuGrid;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.log4j.Logger;
 
-import com.saber.bean.SudokuGrid;
+import java.util.*;
 
 /**
  * @author Saber Pan
@@ -19,8 +14,7 @@ public abstract class BaseAbstract {
 
 	protected Logger LOG = Logger.getLogger(this.getClass());
 
-	public boolean isFind(SudokuGrid sudokuGrid, int x, int y, List<Integer> possibleValue,
-			List<List<Integer>> otherList) throws Exception {
+	public boolean isFind(SudokuGrid sudokuGrid, int x, int y, List<Integer> possibleValue, List<List<Integer>> otherList) throws Exception {
 		Set<List<Integer>> set = new HashSet<List<Integer>>(otherList);
 		if (otherList.size() < 2 || otherList.size() == set.size()) {
 			return false;
@@ -62,5 +56,65 @@ public abstract class BaseAbstract {
 			}
 		}
 		return map;
+	}
+
+	protected boolean isExclusiveValueOnY(SudokuGrid sudokuGrid, int x, int y, int possibleValue) throws Exception {
+		int gridX = x / 3;
+		int gridY = y / 3;
+		for (int xIndex = 0; xIndex < 3; xIndex++) {
+			if (gridX == xIndex) {
+				continue;
+			}
+			boolean isFind = true;
+			for (int yIndex = 0; yIndex < 3; yIndex++) {
+				int tempY = 3 * gridY + yIndex;
+				if (y == tempY) {
+					continue;
+				}
+				for (int subX = 0; subX < 3; subX++) {
+					int tempX = 3 * xIndex + subX;
+					List<Integer> otherGridPossibleValues = sudokuGrid.getPossibleValue(tempX, tempY);
+					if (otherGridPossibleValues.contains(possibleValue)) {
+						isFind = false;
+						break;
+					}
+				}
+			}
+			if (isFind) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	protected boolean isExclusiveValueOnX(SudokuGrid sudokuGrid, int x, int y, int possibleValue) throws Exception {
+		int gridX = x / 3;
+		int gridY = y / 3;
+		for (int yIndex = 0; yIndex < 3; yIndex++) {
+			if (gridY == yIndex) {
+				continue;
+			}
+			boolean isFind = true;
+			for (int xIndex = 0; xIndex < 3; xIndex++) {
+				int tempX = 3 * gridX + xIndex;
+				if (x == tempX) {
+					continue;
+				}
+				for (int subY = 0; subY < 3; subY++) {
+					int tempY = 3 * yIndex + subY;
+					List<Integer> otherGridPossibleValues = sudokuGrid.getPossibleValue(tempX, tempY);
+					if (otherGridPossibleValues.contains(possibleValue)) {
+						isFind = false;
+						break;
+					}
+				}
+			}
+			if (isFind) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
