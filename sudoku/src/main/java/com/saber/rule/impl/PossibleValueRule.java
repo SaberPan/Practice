@@ -1,14 +1,13 @@
 package com.saber.rule.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.log4j.Logger;
-
 import com.saber.bean.SudokuGrid;
 import com.saber.constant.SudokuConstant;
 import com.saber.rule.IFindRule;
+import org.apache.log4j.Logger;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Saber Pan
@@ -22,13 +21,15 @@ public class PossibleValueRule implements IFindRule {
 		boolean isFind = false;
 		if (possibleValue.size() == 1) {
 			sudokuGrid.setValue(possibleValue.get(0), x, y);
-			isFind = true;
+			LOG.info("[" + x + "," + y + "] - " + sudokuGrid.getValue(x, y));
+			return true;
 		} else {
 			Set<Integer> xPossibleValueSet = getAllPossibleValueOnX(sudokuGrid, x, y);
 			for (Integer value : possibleValue) {
 				if (!xPossibleValueSet.contains(value)) {
 					sudokuGrid.setValue(value, x, y);
-					isFind = true;
+					LOG.info("[" + x + "," + y + "] - " + sudokuGrid.getValue(x, y));
+					return true;
 				}
 			}
 
@@ -36,7 +37,8 @@ public class PossibleValueRule implements IFindRule {
 			for (Integer value : possibleValue) {
 				if (!yPossibleValueSet.contains(value)) {
 					sudokuGrid.setValue(value, x, y);
-					isFind = true;
+					LOG.info("[" + x + "," + y + "] - " + sudokuGrid.getValue(x, y));
+					return true;
 				}
 			}
 
@@ -44,14 +46,13 @@ public class PossibleValueRule implements IFindRule {
 			for (Integer value : possibleValue) {
 				if (!gridPossibleValueSet.contains(value)) {
 					sudokuGrid.setValue(value, x, y);
-					isFind = true;
+					LOG.info("[" + x + "," + y + "] - " + sudokuGrid.getValue(x, y));
+					return true;
 				}
 			}
 		}
-		if (isFind) {
-			LOG.info("[" + x + "," + y + "] - " + sudokuGrid.getValue(x, y));
-		}
-		return isFind;
+
+		return false;
 	}
 
 	private Set<Integer> getAllPossibleValueOnX(SudokuGrid sudokuGrid, int exceptX, int exceptY) throws Exception {
