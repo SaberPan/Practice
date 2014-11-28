@@ -9,3 +9,5 @@ com.saber.rule.impl.RecessivenessExclusiveMethodOnX
 com.saber.rule.impl.RecessivenessExclusiveMethodOnY
 com.saber.rule.impl.IndirectRecessivenessExclusiveOnX
 com.saber.rule.impl.IndirectRecessivenessExclusiveOnY
+com.saber.rule.impl.NakedTriplesInGridRule
+com.saber.rule.impl.NakedQuadrupleInGridRule
