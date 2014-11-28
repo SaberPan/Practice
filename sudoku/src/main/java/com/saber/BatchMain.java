@@ -24,7 +24,7 @@ public class BatchMain {
 	}
 
 	private static boolean isSkip(String name) {
-		if (name.contains("empty") || name.contains("true") || name.contains("false") || name.contains("temp")) {
+		if (name.contains("empty") || name.contains("true") || name.contains("false") || name.contains("temp") || name.contains("result")) {
 			return true;
 		}
 

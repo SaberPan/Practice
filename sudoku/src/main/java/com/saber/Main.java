@@ -1,14 +1,13 @@
 package com.saber;
 
-import java.util.Scanner;
-
-import org.apache.log4j.Logger;
-
 import com.saber.bean.SudokuGrid;
 import com.saber.service.Calculator;
 import com.saber.service.InputService;
 import com.saber.service.OutputService;
 import com.saber.util.PathUtils;
+import org.apache.log4j.Logger;
+
+import java.util.Scanner;
 
 /**
  * @author Saber Pan
@@ -40,7 +39,7 @@ public class Main {
 			flag = calculator.find(sudokuGrid);
 			LOG.info("IsFind: " + flag);
 		} finally {
-			String outputFile = PathUtils.getPathInProject("/data/" + fileName + "_" + flag + extension);
+			String outputFile = PathUtils.getPathInProject("/data/result/" + fileName + "_" + flag + extension);
 			new OutputService().output2File(outputFile, sudokuGrid);
 		}
 	}
