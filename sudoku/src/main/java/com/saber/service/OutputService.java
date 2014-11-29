@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.*;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +86,11 @@ public class OutputService {
 				}
 			}
 		}
-		workbook.write(new FileOutputStream(filePath));
+		File file = new File(filePath);
+		if (!file.getParentFile().exists()) {
+			file.getParentFile().mkdir();
+		}
+		workbook.write(new FileOutputStream(file));
 	}
 
 	public void output2FileForOriginal(String filePath, SudokuGrid sukGrid) throws Exception {
